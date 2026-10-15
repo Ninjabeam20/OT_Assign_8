@@ -1,0 +1,5 @@
+# Actual review follow-up
+
+Parent request: a reviewer found that Track I lacked an executed classical linear-search baseline and simulator wall-clock timings. Add both on the same unique target/array, actual comparison counts, warmed repeated medians, regression tests, and rerun through the shared runner.
+
+Response: verified the gap in the code; wrote two tests and observed both fail for missing functionality. Implemented sequential linear_search and search_comparison. The latter uses the same permuted array/marked predicate, records actual comparisons and separate simulator timings, and retains theoretical oracle/logical-gate counts with explicit limitations. Quantum tests: 13 passed. Full suite: 56 passed after supplying the process/socket permission needed by the existing scheduling test. Regenerated results/I.json using python -m optlab run --track I, including metadata. Updated docs/quantum.md with actual measured timing values and interpretation. No quantum speedup or hardware execution is claimed.

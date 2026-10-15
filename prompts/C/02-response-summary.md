@@ -1,0 +1,5 @@
+# Actual AI implementation response summary
+
+Implemented direct NumPy quantum circuits and SciPy optimization rather than depending on an opaque algorithm wrapper. Added tests with independent exact fixtures and ran the five-seed benchmarks. The first dependency attempts failed because pytest/numpy were not installed yet; after shared installation, quantum tests passed. Full benchmark results are persisted in results/C.json. A subsequent classical annealing comparison was developed through a failing test, then passed. Final quantum suite: 11 tests passed; full repository tests had concurrent missing-module collection errors and are delegated to the parent for final integration verification.
+
+Scientific safeguards: distinguish actual circuit simulation from hardware execution, record train/test splits and circuit counts, preserve weak classifier/SPSA results, disclose QNG's simulator-state metric and Shor's dense modular gates, avoid asymptotic barren-plateau or quantum-speedup claims. Details, sources and actual failure observations are in docs/quantum.md. This summary describes this AI agent's actual work; it is not evidence of a second independent AI tool.
