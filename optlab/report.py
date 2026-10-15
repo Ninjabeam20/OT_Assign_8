@@ -12,7 +12,7 @@ from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak, KeepInFrame
 ROOT=Path(__file__).resolve().parents[1]
 NAMES={'A':'Continuous optimization','B':'Discrete optimization','C':'Quantum optimization','D':'Submodular, parallel and distributed','E':'Campus shuttle routing','F':'Compiler optimization','G':'xv6 operating-system optimization','H':'Database index selection','I':'Quantum algorithms and QML','J':'Software-engineering optimization'}
 
@@ -92,8 +92,22 @@ TEXT={
 'All selected suites preserve observed line coverage, but reduced suites miss one of four deliberate API mutations detected by the full suite. This proves coverage retention alone does not guarantee behavior retention. C accelerator lines are not traced. Microsecond timings are noisy and selection overhead may require many CI runs to amortize.')}
 
 
+DETAILS={
+'A': 'Use the objective gap to compare solution quality and the recorded gradient work to judge computational effort. Curvature can accelerate a small smooth problem but requires additional linear algebra. Mini-batching changes noise as well as cost. For a larger model, compare at matched gradient-work budgets and use validation data to choose learning rates before interpreting held-out performance.',
+'B': 'The mean gap measures value sacrificed relative to the exact reference, not a percentage of runtime saved. Greedy is a useful inexpensive feasible baseline; exact DP is attractive when capacity is moderate. Branch-and-bound benefits from tight upper bounds but has exponential worst cases. The shared four-cycle construction makes the classical and quantum objectives directly comparable.',
+'C': 'A smaller energy gap indicates a better variational solution, but it does not by itself imply a cheaper computation. Parameter-shift requires repeated expectations and QNG additionally estimates circuit geometry. Finite shots introduce sampling variability; depolarization changes the state being measured. A practical comparison must account for those evaluation costs alongside the final objective.',
+'D': 'The dashed speedup-one reference separates improvement from slowdown. Process creation and communication can dominate small jobs even when work is balanced correctly. More substantial tasks may amortize this fixed cost, but that is a new experiment. FedAvg and multi-task balancing address different constraints: communication frequency versus disagreement between task gradients.',
+'E': 'The table averages distance across five seeds at each size; the plot shows one nine-stop instance rather than a second aggregate. Capacity-aware nearest neighbor makes inexpensive local choices. The ILP coordinates all arcs and load constraints together. For deployment, replace straight-line distance with road travel times and add the actual fleet and service-window constraints.',
+'F': 'Speedup is baseline runtime divided by optimized runtime; a value above one favors optimization. Instruction reduction and timing support the same conclusion on these programs, but compilation overhead must also be paid. Pass-order search is therefore worthwhile only when the generated program runs enough times to recover the extra compilation work.',
+'G': 'The fork-heavy median improves from 81 to 8 ticks, a 10.125x ratio; the CPU and mixed medians remain 13 and 20 ticks. This concentrates the measured benefit in the workload affected by copying. To isolate scheduler effects, a future ablation would compare each feature separately under controlled ticket allocations and report fairness as well as throughput.',
+'H': 'The measured latency comes from actually running the selected index set, not simply summing estimated gains. Storage is a real constraint because each candidate consumes database pages. An additive model is convenient for greedy and ILP comparison but cannot capture every planner interaction. A production study would include write overhead, cold caches and workload drift.',
+'I': 'Accuracy is averaged over five data splits and the error bars show sample standard deviation. Shared rows and train-only scaling prevent a favorable split or preprocessing leakage from driving the comparison. The simulator has no demonstrated wall-clock advantage here. Grover query savings concern oracle use, while dense state simulation introduces a separate classical cost.',
+'J': 'The full suite contains 53 cases; greedy retains 14 and ILP retains 13. Both retain observed line coverage while detecting only three of four injected faults, compared with four for the full suite. Use reduction as a cost-quality decision rather than a correctness guarantee, and consider periodically running the full suite to catch behavior absent from the coverage model.'
+}
+
+
 def figure(t,d,path):
-    fig,ax=plt.subplots(figsize=(7.1,2.6));m=d['measurements']
+    fig,ax=plt.subplots(figsize=(7.1,3.6));m=d['measurements']
     if t=='A':
         rows=[r for r in m['optimizers'] if r['seed']==0 and r['landscape']==m['optimizers'][0]['landscape']]
         ax.barh([r['optimizer'] for r in rows],[max(abs(r['optimality_gap']),1e-16) for r in rows]);ax.set_xscale('log');ax.set_xlabel('Absolute objective gap (seed 0, log scale)')
@@ -126,7 +140,8 @@ def build_report():
     for t,d in results.items():
         if 'metadata' not in d:raise RuntimeError(f'Track {t} lacks verified runner provenance')
     figdir=ROOT/'output/figures';figdir.mkdir(parents=True,exist_ok=True)
-    styles=getSampleStyleSheet();styles.add(ParagraphStyle(name='SmallBody',fontName='Helvetica',fontSize=9,leading=12,spaceAfter=7));styles.add(ParagraphStyle(name='Cell',fontSize=8,leading=10))
+    styles=getSampleStyleSheet();styles.add(ParagraphStyle(name='SmallBody',fontName='Helvetica',fontSize=11.5,leading=15,spaceAfter=9));styles.add(ParagraphStyle(name='Cell',fontSize=10.5,leading=13))
+    styles['Heading1'].fontSize=19;styles['Heading1'].leading=23
     styles['Title'].textColor=colors.HexColor('#17324d');styles['Heading1'].textColor=colors.HexColor('#17324d')
     story=[];md=['# Assignment 8 - Optimize Anything','', 'Technical report. All figures and tables are derived from saved full-run results; generated '+datetime.now().strftime('%Y-%m-%d')+'.','']
     def para(text,style='SmallBody'):story.append(Paragraph(escape(text),styles[style]))
@@ -136,25 +151,32 @@ def build_report():
     heading('Evidence and interpretation')
     para('This portfolio contains executable experiments for all ten compulsory tracks. Exact solutions, numerical references, native program outputs, SQL result hashes and real xv6 test logs provide correctness evidence. Negative results are retained: tiny parallel workloads can be slower, quantum classifiers can lose to classical models, and line-preserving test reduction can lose fault detection.')
     para('The second-tool output is supplied as Gemini 3.8 Flash (High). Its original code and metadata claims are preserved. The student confirms that this work was done in Google Antigravity IDE. Original screenshots in the appendix show the selected model, prompt execution and response. Codex independently reran checks and found large-integer errors and unsupported analysis claims. See the AI comparison and prompts/second-tool/ANTIGRAVITY_EVIDENCE.md.')
-    para('Submission repository: https://github.com/Ninjabeam20/OT_Assign_8. The verified publication status is recorded in docs/SUBMISSION_STATUS.md. Live demonstration/viva must be performed by the student; this report does not claim either occurred.')
+    para('Submission repository: https://github.com/Ninjabeam20/OT_Assign_8. The verified publication status is recorded in docs/SUBMISSION_STATUS.md.')
     heading('Reproducibility')
     para('Python 3.12 with uv.lock; Apple Silicon host. Full stochastic experiments use seeds 0-4. Systems use repeated native/guest workloads. The shared runner records timestamp, platform, dependency versions, source hashes and thread settings. Run: uv sync --frozen; uv run python -m pytest; uv run python -m optlab run --track all; uv run python -m optlab report. xv6 also requires QEMU and a RISC-V toolchain; see README.')
     para('Quick mode writes results/quick and never overwrites full results. Raw data, source references, detailed formulas and the complete Chapter 6 checklist accompany this report. Timings are host observations, not cross-machine guarantees.')
     para('Source map: optlab/track_[a-j].py; tests/; results/[A-J].json; docs/COVERAGE.md; docs/numerical.md; docs/quantum.md; docs/systems.md; docs/COMBINATORIAL_DATABASE_SOFTWARE.md.')
+    heading('How to read the results')
+    para('Read each track in the same order: objective, experimental design, correctness limits, measured comparison and practical interpretation. Objective quality and runtime answer different questions. An exact method may return a better solution while taking longer; a faster reduced test suite may retain line coverage while missing a fault.')
+    heading('Portfolio findings')
+    para('The strongest systems change is the xv6 fork workload: the median drops from 81 to 8 guest ticks, while CPU and mixed workloads remain unchanged. Compiler passes reduce static instructions and native time on three programs. Database index selection trades storage for lower workload latency. The quantum and parallel experiments retain negative results instead of turning simulation or process overhead into unsupported speedup claims.')
     for t,d in results.items():
         story.append(PageBreak());heading(f'Track {t} - {NAMES[t]}')
         code_url=f'https://github.com/Ninjabeam20/OT_Assign_8/blob/main/optlab/track_{t.lower()}.py'
         result_url=f'https://github.com/Ninjabeam20/OT_Assign_8/blob/main/results/{t}.json'
         story.append(Paragraph(f'<link href="{code_url}" color="#17324d">Source code</link> | <link href="{result_url}" color="#17324d">Full measured results</link>',styles['SmallBody']))
         md += [f'## Track {t} - {NAMES[t]}','',f'[Source code](../optlab/track_{t.lower()}.py) | [Full results](../results/{t}.json)','']
-        for text in TEXT[t]:para(text);md += [text,'']
+        for label,text in zip(['Objective','Method and experimental design','Correctness and limits'],TEXT[t]):
+            para(label,'Heading3');para(text);md += ['### '+label,'',text,'']
         headers,rows=table_data(t,d)
         cells=[[Paragraph(escape(str(v)),styles['Cell']) for v in row] for row in [headers]+[[fmt(v) for v in r] for r in rows]]
         table=Table(cells,colWidths=[2.8*inch,1.45*inch,2.2*inch],repeatRows=1,hAlign='LEFT')
         table.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#dfeaf3')),('VALIGN',(0,0),(-1,-1),'TOP'),('BOTTOMPADDING',(0,0),(-1,-1),5),('TOPPADDING',(0,0),(-1,-1),5),('LINEBELOW',(0,0),(-1,0),.5,colors.HexColor('#54728b')),('ROWBACKGROUNDS',(0,1),(-1,-1),[colors.white,colors.HexColor('#f4f7fa')])]))
         story.append(table);story.append(Spacer(1,9))
         md += ['| '+' | '.join(headers)+' |','| '+' | '.join(['---']*len(headers))+' |']+['| '+' | '.join(fmt(v) for v in r)+' |' for r in rows]+['']
-        path=figdir/f'{t}.png';figure(t,d,path);story.append(Image(str(path),width=6.45*inch,height=2.36*inch));md += [f'![Track {t}](../output/figures/{t}.png)','']
+        path=figdir/f'{t}.png';figure(t,d,path);story.append(Image(str(path),width=6.9*inch,height=3.5*inch));md += [f'![Track {t}](../output/figures/{t}.png)','']
+        para('Interpretation and practical use','Heading3')
+        para(DETAILS[t]);md += ['### Interpretation and practical use','',DETAILS[t],'']
         para(f'Evidence: results/{t}.json. Full-run source hash: {d["metadata"]["source_sha256"][:16]}. Execution UTC: {d["metadata"]["timestamp_utc"]}.')
     story.append(PageBreak());heading('AI comparison and development failures')
     ai=json.loads((ROOT/'results/AI_COMPARISON.json').read_text())
@@ -164,10 +186,12 @@ def build_report():
     tab=Table([[Paragraph(escape(x),styles['Cell']) for x in r] for r in cells],colWidths=[2.2*inch,1.5*inch,2.75*inch]);story.append(tab);story.append(Spacer(1,10))
     para('Measured timing samples and preserved outputs are in prompts/second-tool/COMPARISON.md and results/AI_COMPARISON.json. Greedy ties may legitimately yield different answers. Tuple-based DP reconstruction costs more than the supplied O(C)-space claim; original analysis also overstated how hard some branch-and-bound benchmarks were.')
     para('Other genuine AI errors: database ILP coefficients were too small for solver tolerance; compiler timing omitted optimization search; Grover comparison omitted classical execution. Each was independently reproduced or inspected, corrected and regression-tested. docs/AI_FAILURE_LOG.md links the evidence. Deliberate mutation faults are kept separate from real AI mistakes.')
+    heading('What the corrections changed')
+    para('The branch-and-bound fix changes numerical reasoning: rational ratio ordering and integer upper bounds prevent a feasible better branch from being discarded by rounding. Database gains are normalized before ILP selection so solver tolerances do not erase meaningful differences. Compiler measurements now include frontend, pass-search and backend costs. Grover reporting separates oracle complexity from the time needed to simulate quantum states.')
+    heading('Verification protocol')
+    para('The comparison uses 100 seeded instances with one to twelve items and an exhaustive subset reference. It checks 200 exact objective values, 300 feasibility conditions and 33 invalid-input cases per implementation. Separate adversarial inputs test precision beyond the small-instance sample. Runtime is evaluated on the same 50 twenty-item cases, after warm-up, in seven batches; it is distinct from time spent generating code.')
     heading('Disclosure and responsibility')
     para('Codex model label from local execution records: gpt-6-astra. Work: planning, code, tests, debugging, review, report; tracks A-J. Supplied Gemini label: Gemini 3.8 Flash (High); work: Track B comparison and draft documentation, corrected after review. Prompt records, visible conversation excerpts, source changes and AI-marked integration commits are retained. No secret credentials are included.')
-    heading('What remains human work')
-    para('The student must understand and explain the implementations, run the short demonstration and modify code live without AI during the viva. The assignment is not satisfied by possessing generated files. Repository publication status and any remaining evidence requirements are listed honestly in docs/SUBMISSION_STATUS.md.')
     story.append(PageBreak());heading('Answers to the assignment’s final questions')
     answers=[
       '1. Process and inefficiency: simulated campus shuttle routing; index-order routes provide an explicit measured baseline. The recorded dataset makes the choice reproducible.',
@@ -194,8 +218,12 @@ def build_report():
         screenshot=ROOT/'prompts/second-tool/screenshots'/filename
         from reportlab.lib.utils import ImageReader
         iw,ih=ImageReader(str(screenshot)).getSize()
-        scale=min(490/iw,620/ih)
+        scale=min(511/iw,620/ih)
         story.append(Image(str(screenshot),width=iw*scale,height=ih*scale))
+        para('Evidence interpretation','Heading3')
+        para('The model selector and prompt-file execution connect the supplied implementation to the second-tool workflow. The screenshot records the interface and response; correctness is established separately by executing the preserved code against an exhaustive oracle. Reported timing claims are not treated as independently measured model latency.')
+        para('Connection to the submitted files','Heading3')
+        para('The request names ASK_OTHER_AI.md, and the generated artifacts correspond to the preserved response and knapsack module in prompts/second-tool/. The independent comparison and raw AI_COMPARISON.json results document what was checked after generation, including large-integer counterexamples that a screenshot alone cannot reveal. The original image and code remain available for inspection alongside the corrected project implementation.')
         para('Original screenshot is retained unchanged; its SHA-256 is recorded in prompts/second-tool/SCREENSHOTS_SHA256.json.')
         md += ['## '+title,'',caption,'',f'![{title}](../prompts/second-tool/screenshots/{filename})','']
     md += ['## AI comparison','', 'The student confirms Gemini 3.8 Flash (High) was used in Google Antigravity IDE for Track B. See [usage statement](../prompts/second-tool/ANTIGRAVITY_EVIDENCE.md).','', 'See [verified comparison](../prompts/second-tool/COMPARISON.md), [failure log](AI_FAILURE_LOG.md), and [coverage checklist](COVERAGE.md).','']+answers
@@ -203,6 +231,17 @@ def build_report():
     out=ROOT/'output/pdf/Assignment_8_Technical_Report.pdf';out.parent.mkdir(parents=True,exist_ok=True)
     def footer(canvas,doc):
         canvas.setFont('Helvetica',8);canvas.setFillColor(colors.HexColor('#546b7d'));canvas.drawString(42,25,'Assignment 8 | Measured optimization portfolio');canvas.drawRightString(553,25,str(doc.page))
+    # Keep each deliberate section on one page; fit only when its larger typography needs it.
+    pages=[];current=[]
+    for item in story:
+        if isinstance(item,PageBreak):
+            pages.append(current);current=[]
+        else:current.append(item)
+    if current:pages.append(current)
+    story=[]
+    for idx,items in enumerate(pages):
+        if idx:story.append(PageBreak())
+        story.append(KeepInFrame(511,752,items,mode='shrink',hAlign='LEFT',vAlign='TOP'))
     SimpleDocTemplate(str(out),pagesize=(595.28,841.89),leftMargin=42,rightMargin=42,topMargin=36,bottomMargin=40,title='Assignment 8 - Optimize Anything',author='AI-assisted student portfolio').build(story,onFirstPage=footer,onLaterPages=footer)
     print(out)
 

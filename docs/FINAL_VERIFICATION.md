@@ -29,3 +29,7 @@ The submission suite passed **61 tests in 5.30s** after replacing Gemini proof i
 ## Screenshot evidence restored at student request
 
 Both saved images were visually inspected: they show the Gemini model selection, Antigravity interface, prompt-file execution and response. Their original SHA-256 values match the saved manifest. They are included unchanged in the documentation and the 15-page report. Captions separate displayed AI claims from independently checked results. This is a documentation-only revision; algorithm code and measurements are unchanged.
+
+## Report layout revision
+
+The report keeps 15 pages while replacing sparse 9-point body text with an 11.5-point base style, larger table text and taller, freshly rendered charts. Each track now labels its objective, method, correctness limits and practical interpretation. Page-fit scaling keeps each section together within the printable area. The overview, AI comparison and proof pages include additional relevant explanation. All 15 pages were rendered with Poppler and reviewed; detailed checks included the densest track and both image appendix pages. All ten experiment source hashes still match the saved results; no experiment was rerun or changed.

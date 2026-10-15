@@ -6,9 +6,15 @@ Technical report. All figures and tables are derived from saved full-run results
 
 [Source code](../optlab/track_a.py) | [Full results](../results/A.json)
 
+### Objective
+
 Minimize regression/ML loss over continuous parameters; compare convex, strongly convex and nonconvex landscapes.
 
+### Method and experimental design
+
 Five seeded datasets; identical initial parameters. GD, SGD, mini-batch, Momentum, NAG, AdaGrad, RMSProp, Adam, Newton and Gauss-Newton are implemented. A nonlinear exponential residual distinguishes the two curvature methods. Manual neural-network backpropagation is checked independently of GD/Adam. Fisher, diagonal/low-rank approximations and Hessian-vector products are measured. Validation selects step size; noise and L2 regularization are varied.
+
+### Correctness and limits
 
 Least-squares reference and finite-difference derivative checks establish correctness. Equal update counts are not equal sample-gradient budgets; counts are retained. Saddle initialization can stall and aggressive rates diverge. These small tasks do not establish a universal best optimizer.
 
@@ -27,13 +33,23 @@ Least-squares reference and finite-difference derivative checks establish correc
 
 ![Track A](../output/figures/A.png)
 
+### Interpretation and practical use
+
+Use the objective gap to compare solution quality and the recorded gradient work to judge computational effort. Curvature can accelerate a small smooth problem but requires additional linear algebra. Mini-batching changes noise as well as cost. For a larger model, compare at matched gradient-work budgets and use validation data to choose learning rates before interpreting held-out performance.
+
 ## Track B - Discrete optimization
 
 [Source code](../optlab/track_b.py) | [Full results](../results/B.json)
 
+### Objective
+
 Maximize knapsack value under integer capacity; demonstrate exact and heuristic discrete optimization and QUBO/Ising conversion.
 
+### Method and experimental design
+
 Five 24-item instances compare ratio greedy, dynamic programming, branch-and-bound and ILP. Each timing has a warm-up and repeated samples. Exact methods are checked against exhaustive tiny-instance enumeration. Four-cycle Max-Cut is represented as QUBO and Ising energies; all 16 assignments agree. Cardinality-two selection demonstrates a penalty exceeding possible objective gains.
+
+### Correctness and limits
 
 Greedy is not exact. DP is pseudo-polynomial; storing reconstruction tuples adds path-copy costs. Branch-and-bound uses exact rational ordering and integer bounds after review exposed float precision errors. ILP uses floating-point coefficients on these small bounded integers.
 
@@ -46,13 +62,23 @@ Greedy is not exact. DP is pseudo-polynomial; storing reconstruction tuples adds
 
 ![Track B](../output/figures/B.png)
 
+### Interpretation and practical use
+
+The mean gap measures value sacrificed relative to the exact reference, not a percentage of runtime saved. Greedy is a useful inexpensive feasible baseline; exact DP is attractive when capacity is moderate. Branch-and-bound benefits from tight upper bounds but has exponential worst cases. The shared four-cycle construction makes the classical and quantum objectives directly comparable.
+
 ## Track C - Quantum optimization
 
 [Source code](../optlab/track_c.py) | [Full results](../results/C.json)
 
+### Objective
+
 Optimize parameterized quantum circuits with classical feedback; compare objective quality, circuit counts and measurement cost.
 
+### Method and experimental design
+
 Five seeds: p=2 QAOA solves the same four-cycle as B, VQE minimizes Z0+Z1+0.5 X0X1, and a PQC regresses sin(x). Parameter-shift gradient descent, SPSA and regularized quantum natural gradient share initial conditions. A density-matrix depolarizing hardware-noise model and finite-shot sampling study measurement error. Random circuits at 2/4/6/8 qubits probe gradient variance.
+
+### Correctness and limits
 
 QAOA is bounded by exact enumeration and VQE by diagonalization. QNG state-derivative overhead is counted separately. Statevectors/density matrices run on a classical CPU, not a QPU. Small size/depth sweeps do not prove asymptotic barren plateaus; clean-angle evaluation under noise is not noisy retraining.
 
@@ -66,13 +92,23 @@ QAOA is bounded by exact enumeration and VQE by diagonalization. QNG state-deriv
 
 ![Track C](../output/figures/C.png)
 
+### Interpretation and practical use
+
+A smaller energy gap indicates a better variational solution, but it does not by itself imply a cheaper computation. Parameter-shift requires repeated expectations and QNG additionally estimates circuit geometry. Finite shots introduce sampling variability; depolarization changes the state being measured. A practical comparison must account for those evaluation costs alongside the final objective.
+
 ## Track D - Submodular, parallel and distributed
 
 [Source code](../optlab/track_d.py) | [Full results](../results/D.json)
 
+### Objective
+
 Maximize submodular coverage; reduce parallel makespan; study communication and conflicting learning objectives.
 
+### Method and experimental design
+
 Coverage greedy is checked against exhaustive optima and diminishing-return conditions, including a 5/6 counterexample. Real spawned processes execute static, dynamic and work-stealing scheduling, locality experiments and data/model/pipeline decompositions. FedAvg varies local steps and rounds against centralized gradient work. MGDA and GradNorm balance a two-task shared model against equal weights.
+
+### Correctness and limits
 
 Parallel outputs match serial references. Timings include spawn, IPC, synchronization and shutdown; small tasks often slow down. FedAvg clients are sequential simulations, not a measured network. Amdahl and Gustafson predictions use stated assumed serial fractions; actual speedup and efficiency are separate measurements.
 
@@ -84,13 +120,23 @@ Parallel outputs match serial references. Timings include spawn, IPC, synchroniz
 
 ![Track D](../output/figures/D.png)
 
+### Interpretation and practical use
+
+The dashed speedup-one reference separates improvement from slowdown. Process creation and communication can dominate small jobs even when work is balanced correctly. More substantial tasks may amortize this fixed cost, but that is a new experiment. FedAvg and multi-task balancing address different constraints: communication frequency versus disagreement between task gradients.
+
 ## Track E - Campus shuttle routing
 
 [Source code](../optlab/track_e.py) | [Full results](../results/E.json)
 
+### Objective
+
 Reduce the travel distance of a simulated campus shuttle while serving every stop within capacity six.
 
+### Method and experimental design
+
 Synthetic baseline: index-order visitation, returning to the depot when necessary. Five seeds create 5- and 9-stop datasets in a six-kilometre square with demand 1-3. Compare feasible nearest-neighbor routes with binary-arc ILP using load-based MTZ constraints. Minimize sum(d_ij*x_ij); one arrival/departure per stop, balanced depot flow, q_i <= u_i <= Q and u_i-u_j+Q*x_ij <= Q-q_j.
+
+### Correctness and limits
 
 Every route is checked for unique stop coverage and capacity. Four-stop solutions are checked against independent permutation/partition enumeration. Solver statuses, bounds and gaps are retained with a 20-second limit. This is simulated evidence, not an actual campus survey; roads, time windows and fleet limits are excluded.
 
@@ -105,13 +151,23 @@ Every route is checked for unique stop coverage and capacity. Four-stop solution
 
 ![Track E](../output/figures/E.png)
 
+### Interpretation and practical use
+
+The table averages distance across five seeds at each size; the plot shows one nine-stop instance rather than a second aggregate. Capacity-aware nearest neighbor makes inexpensive local choices. The ILP coordinates all arcs and load constraints together. For deployment, replace straight-line distance with road travel times and add the actual fleet and service-window constraints.
+
 ## Track F - Compiler optimization
 
 [Source code](../optlab/track_f.py) | [Full results](../results/F.json)
 
+### Objective
+
 Reduce generated code cost without changing unsigned 64-bit program behavior; optimize compiler pass ordering.
 
+### Method and experimental design
+
 A toy-language lexer/parser produces temporary-based IR, interpreted and compiled to C. Four passes: constant folding, propagation, dead-code elimination and common-subexpression elimination. Greedy triple-pass lookahead minimizes weighted IR cost, subject to output equivalence. Native Clang -O0 executables run 100 million inputs, with five CPU-time samples per variant.
+
+### Correctness and limits
 
 All 24 pass permutations are checked on representative programs; native checksums match. Frontend, optimization search, backend and end-to-end compilation costs are recorded after review found omitted overhead. Static function instruction counts are not retired hardware counters; executable padding can hide size reductions.
 
@@ -123,13 +179,23 @@ All 24 pass permutations are checked on representative programs; native checksum
 
 ![Track F](../output/figures/F.png)
 
+### Interpretation and practical use
+
+Speedup is baseline runtime divided by optimized runtime; a value above one favors optimization. Instruction reduction and timing support the same conclusion on these programs, but compilation overhead must also be paid. Pass-order search is therefore worthwhile only when the generated program runs enough times to recover the extra compilation work.
+
 ## Track G - xv6 operating-system optimization
 
 [Source code](../optlab/track_g.py) | [Full results](../results/G.json)
 
+### Objective
+
 Optimize xv6 memory sharing and scheduling while preserving kernel correctness.
 
+### Method and experimental design
+
 Pinned MIT xv6-riscv runs in QEMU. Baseline round-robin/eager fork is compared with equal-ticket lottery scheduling and copy-on-write fork. Page-reference counts, store faults and kernel copyout handle COW; read-only pages remain protected. Three repetitions each of fork-heavy, CPU and mixed CPU/sleep workloads are measured in guest timer ticks.
+
+### Correctness and limits
 
 Fresh-disk full upstream usertests pass for baseline one hart, optimized one hart and optimized three harts; raw logs are retained. Two simultaneous kernel changes prevent clean causal attribution. Fork gains plausibly come from avoided copying. No scheduler fairness advantage is claimed. QEMU timing is not physical RISC-V performance.
 
@@ -141,13 +207,23 @@ Fresh-disk full upstream usertests pass for baseline one hart, optimized one har
 
 ![Track G](../output/figures/G.png)
 
+### Interpretation and practical use
+
+The fork-heavy median improves from 81 to 8 ticks, a 10.125x ratio; the CPU and mixed medians remain 13 and 20 ticks. This concentrates the measured benefit in the workload affected by copying. To isolate scheduler effects, a future ablation would compare each feature separately under controlled ticket allocations and report fairness as well as throughput.
+
 ## Track H - Database index selection
 
 [Source code](../optlab/track_h.py) | [Full results](../results/H.json)
 
+### Objective
+
 Choose database indexes to reduce a real SQLite query workload under a storage budget.
 
+### Method and experimental design
+
 Five synthetic 50,000-row sales databases and five fixed SQL queries compare default no-secondary-index planning with greedy and ILP index selection. Candidate sizes are measured occupied pages. The binary objective sums isolated latency gains subject to 40% of total candidate storage. Chosen combinations are then actually benchmarked; EXPLAIN QUERY PLAN and exact result hashes are retained.
+
+### Correctness and limits
 
 Integer currency avoids floating-point aggregation-order changes. Median warm-cache latency, raw samples, sequential throughput and storage are measured. Additive gain estimates ignore index interactions, so ILP optimality applies to the selection model, not necessarily measured runtime. Normalized objective units avoid solver-tolerance errors.
 
@@ -159,13 +235,23 @@ Integer currency avoids floating-point aggregation-order changes. Median warm-ca
 
 ![Track H](../output/figures/H.png)
 
+### Interpretation and practical use
+
+The measured latency comes from actually running the selected index set, not simply summing estimated gains. Storage is a real constraint because each candidate consumes database pages. An additive model is convenient for greedy and ILP comparison but cannot capture every planner interaction. A production study would include write overhead, cold caches and workload drift.
+
 ## Track I - Quantum algorithms and QML
 
 [Source code](../optlab/track_i.py) | [Full results](../results/I.json)
 
+### Objective
+
 Measure quantum algorithm behavior and QML tradeoffs relative to classical methods.
 
+### Method and experimental design
+
 Direct circuits demonstrate Deutsch-Jozsa, Bernstein-Vazirani, Grover, QFT, QPE and Shor order finding for 15. Suzuki-Trotter Monte Carlo models annealing and is compared with classical annealing. A nine-parameter variational classifier and fidelity-kernel SVM share train/test rows with classical models on 72 two-moons samples. Scalers fit training data only.
+
+### Correctness and limits
 
 Grover includes actual linear-search comparisons, logical gate/query counts and separately labeled simulator timings. QML reports accuracy, training time, parameters and circuit evaluations; cached feature-state work differs from hardware overlap circuits. Classical models outperform these quantum classifiers on average. Dense Shor multiplication and simulated annealing are small demonstrations, not scalable hardware implementations.
 
@@ -179,13 +265,23 @@ Grover includes actual linear-search comparisons, logical gate/query counts and 
 
 ![Track I](../output/figures/I.png)
 
+### Interpretation and practical use
+
+Accuracy is averaged over five data splits and the error bars show sample standard deviation. Shared rows and train-only scaling prevent a favorable split or preprocessing leakage from driving the comparison. The simulator has no demonstrated wall-clock advantage here. Grover query savings concern oracle use, while dense state simulation introduces a separate classical cost.
+
 ## Track J - Software-engineering optimization
 
 [Source code](../optlab/track_j.py) | [Full results](../results/J.json)
 
+### Objective
+
 Minimize test execution cost while preserving all Python JSON lines covered by a candidate suite.
 
+### Method and experimental design
+
 The target is public CPython json (1,317 Python source lines), not the small toy compiler. Fifty-three cases cover parsing, encoding, Unicode, invalid syntax and options. cProfile establishes baseline costs. Weighted set cover compares full suite, naive prefix, greedy and ILP. Minimize sum(t_i*x_i) subject to each observed line retaining at least one selected test.
+
+### Correctness and limits
 
 All selected suites preserve observed line coverage, but reduced suites miss one of four deliberate API mutations detected by the full suite. This proves coverage retention alone does not guarantee behavior retention. C accelerator lines are not traced. Microsecond timings are noisy and selection overhead may require many CI runs to amortize.
 
@@ -197,6 +293,10 @@ All selected suites preserve observed line coverage, but reduced suites miss one
 | ILP | 13 / 3.010x | 3 |
 
 ![Track J](../output/figures/J.png)
+
+### Interpretation and practical use
+
+The full suite contains 53 cases; greedy retains 14 and ILP retains 13. Both retain observed line coverage while detecting only three of four injected faults, compared with four for the full suite. Use reduction as a cost-quality decision rather than a correctness guarantee, and consider periodically running the full suite to catch behavior absent from the coverage model.
 
 ## Gemini evidence 1 - Prompt and response
 
