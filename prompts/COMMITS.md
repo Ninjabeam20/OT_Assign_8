@@ -18,4 +18,4 @@ Original development and review preceded integration. Earlier broader integratio
 | I | [6f44bc4](https://github.com/Ninjabeam20/OT_Assign_8/commit/6f44bc420c54f9abf3f48fea21bbd3db51a4ed66) | [I/EVIDENCE.md](I/EVIDENCE.md) |
 | J | [6f44bc4](https://github.com/Ninjabeam20/OT_Assign_8/commit/6f44bc420c54f9abf3f48fea21bbd3db51a4ed66) | [J/EVIDENCE.md](J/EVIDENCE.md) |
 
-The following `[AI:Codex]` commit adds README, report PDF/source, figures and reconciled AI records. Its real hash is added in a subsequent documentation commit, so this file never claims to contain its own future hash.
+README, report PDF/source, figures and reconciled evidence: [6b207a7](https://github.com/Ninjabeam20/OT_Assign_8/commit/6b207a73cfb58143bd6cc379b18176b2d421b76e) (`[AI:Codex]`). A subsequent documentation commit records the verified publication state; no file claims to contain its own future commit hash.

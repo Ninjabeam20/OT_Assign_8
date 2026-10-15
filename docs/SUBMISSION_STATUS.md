@@ -24,7 +24,7 @@ Authoritative current ledger. Original supplied status is preserved at `prompts/
 - README, demo guide, per-track evidence and sanitized visible conversation excerpts are included.
 - Clean-environment reproduction and final PDF inspection: see [final verification](FINAL_VERIFICATION.md).
 - Integration commit references: [commit map](../prompts/COMMITS.md).
-- Public repository requested by the student: `https://github.com/Ninjabeam20/OT_Assign_8` (public). Publication is being verified; no successful push is claimed before remote confirmation.
+- Public repository: **[Ninjabeam20/OT_Assign_8](https://github.com/Ninjabeam20/OT_Assign_8)**. GitHub confirms PUBLIC visibility and default branch `main`. The remote tree matches all 108 audited submission file paths and Git blob hashes. No extra local history, scratch logs, ZIP or environments were pushed.
 - Both user-supplied Gemini screenshots are preserved unchanged and included in the report appendix. Workflow-duration and model-response claims are explicitly distinguished.
 - Only assignment source/tests/results/report/evidence are selected for publication; local progress and duplicate runs are excluded. No submission ZIP is included.
 

@@ -1,5 +1,7 @@
 # OT_Assign_8 - Optimize Anything
 
+Public submission: [Ninjabeam20/OT_Assign_8](https://github.com/Ninjabeam20/OT_Assign_8).
+
 Ten implemented optimization experiments. Main study: **synthetic campus shuttle capacitated vehicle routing**, using five seeded instances at each of two sizes. This is simulated data, not a campus survey.
 
 ## Run
