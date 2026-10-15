@@ -46,7 +46,7 @@ Scope is the entire explicit list in Assignment 8, confirmed by the user. The sy
 
 ## External evidence and human work
 
-- Supplied second-tool response is present at `prompts/second-tool/RESPONSE.md`; preserved code is independently checked by `scripts/compare_ai.py`. Supplied chat screenshots are retained in `prompts/second-tool/screenshots/`; metadata and latency claims are distinguished from independent measurements.
+- Supplied second-tool response is present at `prompts/second-tool/RESPONSE.md`; preserved code is independently checked by `scripts/compare_ai.py`. The student confirms Gemini use in Google Antigravity IDE; see `prompts/second-tool/ANTIGRAVITY_EVIDENCE.md`. Metadata and latency claims are distinguished from independent measurements.
 - Current publication and verification: `docs/SUBMISSION_STATUS.md` and `docs/FINAL_VERIFICATION.md`.
 - Actual visible conversation excerpts and labeled per-track retrospective records: `prompts/README.md`. Commit map: `prompts/COMMITS.md`.
 - Live viva/demonstration must be performed by the student. `docs/DEMO_AND_VIVA.md` is preparation, not proof of performance.

@@ -135,7 +135,7 @@ def build_report():
     para('Main case study: capacity-constrained campus shuttle routing. Development: AI-assisted implementations, independent tests, measured comparisons and documented corrections.')
     heading('Evidence and interpretation')
     para('This portfolio contains executable experiments for all ten compulsory tracks. Exact solutions, numerical references, native program outputs, SQL result hashes and real xv6 test logs provide correctness evidence. Negative results are retained: tiny parallel workloads can be slower, quantum classifiers can lose to classical models, and line-preserving test reduction can lose fault detection.')
-    para('The second-tool output is supplied as Gemini 3.8 Flash (High). Its original code and metadata claims are preserved. Supplied chat screenshots show the model label, prompt-file execution and response. Codex independently reran checks and found large-integer errors and unsupported analysis claims. See the AI comparison and screenshot appendices.')
+    para('The second-tool output is supplied as Gemini 3.8 Flash (High). Its original code and metadata claims are preserved. The student confirms that this work was done in Google Antigravity IDE. Codex independently reran checks and found large-integer errors and unsupported analysis claims. See the AI comparison and prompts/second-tool/ANTIGRAVITY_EVIDENCE.md.')
     para('Submission repository: https://github.com/Ninjabeam20/OT_Assign_8. The verified publication status is recorded in docs/SUBMISSION_STATUS.md. Live demonstration/viva must be performed by the student; this report does not claim either occurred.')
     heading('Reproducibility')
     para('Python 3.12 with uv.lock; Apple Silicon host. Full stochastic experiments use seeds 0-4. Systems use repeated native/guest workloads. The shared runner records timestamp, platform, dependency versions, source hashes and thread settings. Run: uv sync --frozen; uv run python -m pytest; uv run python -m optlab run --track all; uv run python -m optlab report. xv6 also requires QEMU and a RISC-V toolchain; see README.')
@@ -159,7 +159,7 @@ def build_report():
     story.append(PageBreak());heading('AI comparison and development failures')
     ai=json.loads((ROOT/'results/AI_COMPARISON.json').read_text())
     para('Original Codex and Gemini outputs passed 100 independently generated small-integer instances, with exhaustive optimum checks for both exact methods. Six Gemini embedded tests pass. Both original branch-and-bound implementations fail on permitted large integers because floating-point upper bounds can prune a better solution. Corrected Codex uses exact rational ordering and integer bounds; accepted NumPy integers are normalized to Python integers to prevent overflow.')
-    para('The comparison is not a controlled ranking of foundation models: Codex had assignment context and its original module imports NumPy/SciPy; Gemini received a standard-library-only prompt. Corrected Codex has the benefit of review. The supplied UI shows Worked for 15m; the original response claims approximately 2.5 seconds. These describe unverified, potentially different durations; neither is an independently timed code-generation benchmark. The screenshots substantiate the displayed model label and response, not every claim.')
+    para('The comparison is not a controlled ranking of foundation models: Codex had assignment context and its original module imports NumPy/SciPy; Gemini received a standard-library-only prompt. Corrected Codex has the benefit of review. The original response claims approximately 2.5 seconds; this is unverified response latency. The Antigravity workflow statement is supplied by the student.')
     cells=[['Original implementation','Small exact checks','Adversarial issue']]+[[label,str(ai['checks'][label]['exact_checks_passed'])+'/200','float bound precision'] for label in ['Codex original','Gemini original']]
     tab=Table([[Paragraph(escape(x),styles['Cell']) for x in r] for r in cells],colWidths=[2.2*inch,1.5*inch,2.75*inch]);story.append(tab);story.append(Spacer(1,10))
     para('Measured timing samples and preserved outputs are in prompts/second-tool/COMPARISON.md and results/AI_COMPARISON.json. Greedy ties may legitimately yield different answers. Tuple-based DP reconstruction costs more than the supplied O(C)-space claim; original analysis also overstated how hard some branch-and-bound benchmarks were.')
@@ -185,20 +185,7 @@ def build_report():
     heading('Primary references')
     for source in ['MIT xv6 source and COW lab: github.com/mit-pdos/xv6-riscv; pdos.csail.mit.edu/6.1810/2024/labs/cow.html', 'SciPy MILP documentation: docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.milp.html; SQLite query plans: sqlite.org/eqp.html', 'Adam: arxiv.org/abs/1412.6980; FedAvg: proceedings.mlr.press/v54/mcmahan17a.html; MGDA: arxiv.org/abs/1810.04650; GradNorm: proceedings.mlr.press/v80/chen18a.html', 'Quantum reference links and implementation caveats: docs/quantum.md. CPython JSON source/license: github.com/python/cpython/tree/v3.12.13/Lib/json; docs.python.org/3/license.html']:
         para(source)
-    screenshots=[
-        ('Gemini evidence 1 - Prompt and response', 'gemini-execution-summary.png', 'Original user-supplied screenshot: prompt-file execution, selected Gemini 3.8 Flash High label and generated-artifact summary. The UI displays Worked for 15m; the original response claims approximately 2.5 seconds. These are different reported durations, not independently measured code-generation latency.'),
-        ('Gemini evidence 2 - Benchmark claims', 'gemini-benchmark-response.png', 'Original user-supplied screenshot: Gemini reports its knapsack example, validation, 100-instance cross-check and timing claims. This is evidence of the response, not independent verification. Our exhaustive checks and large-integer counterexamples are in results/AI_COMPARISON.json and prompts/second-tool/COMPARISON.md.')
-    ]
-    for title,filename,caption in screenshots:
-        story.append(PageBreak());heading(title);para(caption)
-        screenshot=ROOT/'prompts/second-tool/screenshots'/filename
-        from reportlab.lib.utils import ImageReader
-        iw,ih=ImageReader(str(screenshot)).getSize()
-        scale=min(490/iw,620/ih)
-        story.append(Image(str(screenshot),width=iw*scale,height=ih*scale))
-        para('Original screenshot is retained unchanged; its SHA-256 is recorded in prompts/second-tool/SCREENSHOTS_SHA256.json.')
-        md += ['## '+title,'',caption,'',f'![{title}](../prompts/second-tool/screenshots/{filename})','']
-    md += ['## AI comparison','', 'See [verified comparison](../prompts/second-tool/COMPARISON.md), [failure log](AI_FAILURE_LOG.md), and [coverage checklist](COVERAGE.md).','']+answers
+    md += ['## AI comparison','', 'The student confirms Gemini 3.8 Flash (High) was used in Google Antigravity IDE for Track B. See [usage statement](../prompts/second-tool/ANTIGRAVITY_EVIDENCE.md).','', 'See [verified comparison](../prompts/second-tool/COMPARISON.md), [failure log](AI_FAILURE_LOG.md), and [coverage checklist](COVERAGE.md).','']+answers
     (ROOT/'docs/REPORT.md').write_text('\n'.join(md)+'\n')
     out=ROOT/'output/pdf/Assignment_8_Technical_Report.pdf';out.parent.mkdir(parents=True,exist_ok=True)
     def footer(canvas,doc):

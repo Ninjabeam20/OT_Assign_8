@@ -76,8 +76,8 @@ def main():
     (ROOT/'results/AI_COMPARISON.json').write_text(json.dumps(result,indent=2)+'\n')
     lines=['# Independently verified AI comparison','',
       'User supplied Gemini 3.8 Flash (High), approximately 2.5 seconds and one attempt. Original response/code are preserved unchanged. Original Gemini analysis and status are preserved as GEMINI_COMPARISON_ORIGINAL.md and GEMINI_STATUS_ORIGINAL.md. These are supplied artifacts, not independently authenticated provider exports.','',
-      '## Supplied chat screenshots','',
-      'Two original user-supplied screenshots show the selected Gemini 3.8 Flash High label, prompt-file execution and response claims. See [screenshot evidence](SCREENSHOT_EVIDENCE.md). The UI displays Worked for 15m; this is distinct from the original response’s unverified approximately 2.5-second claim. Neither exact model response latency nor a complete prompt history is independently established.','',
+      '## Antigravity usage statement','',
+      'The student confirms that Gemini 3.8 Flash (High) was used in Google Antigravity IDE. See [usage statement](ANTIGRAVITY_EVIDENCE.md). Original response latency and complete prompt history are not independently verified.','',
       '## Verification','',
       'This reproducible check uses 100 instances with 1–12 items (seed 20261015), exhaustive enumeration, 300 feasibility checks and 200 exact-value checks per implementation. All pass on these small integers. All 33 invalid-input checks per implementation pass. Gemini’s six embedded tests also pass.','',
       'Two deliberately chosen large-integer instances expose floating-point branch-and-bound failures in the original implementations. These integers are allowed by the prompt. The corrected project code uses exact rational ordering and integer upper bounds. Original Gemini code remains untouched.','',

@@ -35,3 +35,8 @@ HANDOFF.md
 /results/xv6/optimized-multicore-result.json
 /results/xv6/optimized-usertests-cpu1.log
 /tests/test_runner.py
+
+# Gemini proof images retained locally at the student's request
+/prompts/second-tool/screenshots/
+/prompts/second-tool/SCREENSHOT_EVIDENCE.md
+/prompts/second-tool/SCREENSHOTS_SHA256.json

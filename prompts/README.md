@@ -4,7 +4,7 @@
 
 [Second-tool originals and independent comparison](second-tool/COMPARISON.md) retain the supplied prompt, response, executable and original analysis/status separately from corrections. [Original artifact hash manifest](ORIGINAL_ARTIFACTS_SHA256.json) allows byte verification.
 
-[Integration commits](COMMITS.md) map actual code/evidence snapshots to real commit hashes. These were made after implementation/review; they are not a historical per-edit timeline. Per-track source excerpts are generated-output evidence, not conversational quotations. The supplied [Gemini screenshots](second-tool/SCREENSHOT_EVIDENCE.md) retain its displayed model label and chat response. No provider-authenticated export or independently timed response is claimed.
+[Integration commits](COMMITS.md) map actual code/evidence snapshots to real commit hashes. These were made after implementation/review; they are not a historical per-edit timeline. Per-track source excerpts are generated-output evidence, not conversational quotations. The [Antigravity usage statement](second-tool/ANTIGRAVITY_EVIDENCE.md) records the student's confirmation of Gemini use. No provider-authenticated export or independently timed response is claimed.
 
 - [A: Ten continuous optimizers; nonlinear Newton/Gauss-Newton, backprop, Fisher/HVP](A/EVIDENCE.md)
 - [B: Knapsack greedy/DP/B&B/ILP; exact QUBO-to-Ising conversion](B/EVIDENCE.md)

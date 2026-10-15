@@ -24,11 +24,11 @@ Authoritative current ledger. Original supplied status is preserved at `prompts/
 - README, demo guide, per-track evidence and sanitized visible conversation excerpts are included.
 - Clean-environment reproduction and final PDF inspection: see [final verification](FINAL_VERIFICATION.md).
 - Integration commit references: [commit map](../prompts/COMMITS.md).
-- Public repository: **[Ninjabeam20/OT_Assign_8](https://github.com/Ninjabeam20/OT_Assign_8)**. GitHub confirms PUBLIC visibility and default branch `main`. The remote tree matches all 108 audited submission file paths and Git blob hashes. No extra local history, scratch logs, ZIP or environments were pushed.
-- Both user-supplied Gemini screenshots are preserved unchanged and included in the report appendix. Workflow-duration and model-response claims are explicitly distinguished.
+- Public repository: **[Ninjabeam20/OT_Assign_8](https://github.com/Ninjabeam20/OT_Assign_8)**. GitHub confirms PUBLIC visibility and default branch `main`. The selected submission tree is verified against the remote after publication. No extra local history, scratch logs, ZIP or environments were pushed.
+- Gemini proof is a text statement confirming use in Google Antigravity IDE. Proof images remain local and are excluded from the current submission and report.
 - Only assignment source/tests/results/report/evidence are selected for publication; local progress and duplicate runs are excluded. No submission ZIP is included.
 
 
 ## Remaining human responsibilities
 
-The student must understand the implementations and perform the live demo/viva. Gemini screenshots now provide direct chat-interface evidence; exact latency and complete iteration history remain unverified. Some track records are retrospective indexes, not complete original/revised-prompt transcripts. The exact continuation model label is not recorded. These limits are disclosed rather than fabricated.
+The student must understand the implementations and perform the live demo/viva. Gemini use in Antigravity is student-confirmed; exact latency and complete iteration history remain unverified. Some track records are retrospective indexes, not complete original/revised-prompt transcripts. The exact continuation model label is not recorded. These limits are disclosed rather than fabricated.
