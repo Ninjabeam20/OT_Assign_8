@@ -1,0 +1,248 @@
+{
+  "tool_metadata": {
+    "tool": "Gemini",
+    "model_label_user_reported": "Gemini 3.8 Flash (High)",
+    "date_user_reported": "2026-10-15",
+    "response_seconds_user_reported": 2.5,
+    "attempts_user_reported": 1
+  },
+  "protocol": {
+    "seed": 20261015,
+    "instances": 100,
+    "n_range": [
+      1,
+      12
+    ],
+    "oracle": "exhaustive subset enumeration",
+    "benchmark_instances": 50,
+    "benchmark_n": 20,
+    "benchmark_capacity": 300,
+    "benchmark_repeats": 7,
+    "warmup": true,
+    "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]"
+  },
+  "checks": {
+    "Codex original": {
+      "exact_checks_passed": 200,
+      "feasibility_checks_passed": 300,
+      "validation_checks_passed": 33
+    },
+    "Gemini original": {
+      "exact_checks_passed": 200,
+      "feasibility_checks_passed": 300,
+      "validation_checks_passed": 33
+    },
+    "Codex corrected": {
+      "exact_checks_passed": 200,
+      "feasibility_checks_passed": 300,
+      "validation_checks_passed": 33
+    }
+  },
+  "adversarial": [
+    {
+      "name": "Codex bound rounding",
+      "weights": [
+        6,
+        1,
+        3,
+        8,
+        8,
+        6
+      ],
+      "values": [
+        18014398509481997,
+        18014398509481991,
+        18014398509481988,
+        18014398509482001,
+        18014398509481989,
+        18014398509482000
+      ],
+      "capacity": 12,
+      "exact_optimum": 54043195528445980,
+      "outputs": {
+        "Codex original": 54043195528445979,
+        "Gemini original": 54043195528445979,
+        "Codex corrected": 54043195528445980
+      }
+    },
+    {
+      "name": "Gemini bound rounding",
+      "weights": [
+        8,
+        8,
+        2,
+        3,
+        7,
+        1
+      ],
+      "values": [
+        18014398509481985,
+        18014398509481990,
+        18014398509481990,
+        18014398509481989,
+        18014398509481993,
+        18014398509481986
+      ],
+      "capacity": 12,
+      "exact_optimum": 54043195528445972,
+      "outputs": {
+        "Codex original": 54043195528445972,
+        "Gemini original": 54043195528445969,
+        "Codex corrected": 54043195528445972
+      }
+    }
+  ],
+  "timings": [
+    {
+      "implementation": "Codex original",
+      "method": "greedy",
+      "median_seconds_per_solve": 3.5641599970404058e-06,
+      "seconds_samples": [
+        3.6191799881635234e-06,
+        3.573340000002645e-06,
+        3.5716800084628632e-06,
+        3.5641599970404058e-06,
+        3.5541599936550485e-06,
+        3.559180004231166e-06,
+        3.5616800050775056e-06
+      ]
+    },
+    {
+      "implementation": "Codex original",
+      "method": "dynamic_programming",
+      "median_seconds_per_solve": 0.00030119750001176724,
+      "seconds_samples": [
+        0.000302698320010677,
+        0.0003018458399856172,
+        0.0003001291599866818,
+        0.0002999899999849731,
+        0.00030119750001176724,
+        0.00029758500000752973,
+        0.00030334000000948436
+      ]
+    },
+    {
+      "implementation": "Codex original",
+      "method": "branch_and_bound",
+      "median_seconds_per_solve": 2.300915999512654e-05,
+      "seconds_samples": [
+        2.3920839994389097e-05,
+        2.290000000357395e-05,
+        2.2843320002721158e-05,
+        2.300915999512654e-05,
+        2.4737500007177003e-05,
+        2.3873320005805e-05,
+        2.2741659995517695e-05
+      ]
+    },
+    {
+      "implementation": "Gemini original",
+      "method": "greedy",
+      "median_seconds_per_solve": 3.555839994078269e-06,
+      "seconds_samples": [
+        3.650840008049272e-06,
+        4.024160007247701e-06,
+        3.3849999999802093e-06,
+        3.603320001275279e-06,
+        3.359160000400152e-06,
+        3.555839994078269e-06,
+        3.532500013534445e-06
+      ]
+    },
+    {
+      "implementation": "Gemini original",
+      "method": "dynamic_programming",
+      "median_seconds_per_solve": 0.00029494165999494726,
+      "seconds_samples": [
+        0.0002963516599993454,
+        0.00029494165999494726,
+        0.00029558418000306117,
+        0.00029717834000621225,
+        0.0002933275000032154,
+        0.0002903441599846701,
+        0.00029270749999341203
+      ]
+    },
+    {
+      "implementation": "Gemini original",
+      "method": "branch_and_bound",
+      "median_seconds_per_solve": 2.435165999486344e-05,
+      "seconds_samples": [
+        2.5534159995004302e-05,
+        2.4149159999069524e-05,
+        2.43649999902118e-05,
+        2.4684159998287215e-05,
+        2.3995000010472722e-05,
+        2.435165999486344e-05,
+        2.4284999999508726e-05
+      ]
+    },
+    {
+      "implementation": "Codex corrected",
+      "method": "greedy",
+      "median_seconds_per_solve": 1.676665999184479e-05,
+      "seconds_samples": [
+        1.712834000500152e-05,
+        1.676665999184479e-05,
+        1.642500001253211e-05,
+        1.6564159996050875e-05,
+        1.6633340001135365e-05,
+        1.6890000006242188e-05,
+        1.688500000454951e-05
+      ]
+    },
+    {
+      "implementation": "Codex corrected",
+      "method": "dynamic_programming",
+      "median_seconds_per_solve": 0.0003026366599988251,
+      "seconds_samples": [
+        0.0003030666599988763,
+        0.0003062083199984045,
+        0.00030148166000799393,
+        0.0003026366599988251,
+        0.0002994941600081802,
+        0.00030193249998774265,
+        0.00030491666000671103
+      ]
+    },
+    {
+      "implementation": "Codex corrected",
+      "method": "branch_and_bound",
+      "median_seconds_per_solve": 5.0222499994561075e-05,
+      "seconds_samples": [
+        4.981084000974079e-05,
+        5.150749999302206e-05,
+        4.995749999579857e-05,
+        4.935581999234273e-05,
+        5.186084001252311e-05,
+        5.0222499994561075e-05,
+        5.11249999908614e-05
+      ]
+    }
+  ],
+  "tie_example": {
+    "Codex original": [
+      1,
+      [
+        0
+      ]
+    ],
+    "Gemini original": [
+      2,
+      [
+        1
+      ]
+    ],
+    "Codex corrected": [
+      1,
+      [
+        0
+      ]
+    ]
+  },
+  "limitations": [
+    "Original Codex module was made in broader assignment context and imports NumPy/SciPy, unlike Gemini standard-library-only prompt. This is an implementation comparison, not a controlled model ranking.",
+    "External response latency/model/attempt metadata is user-provided, not independently timed by Codex.",
+    "Corrected Codex implementation benefits from seeing counterexamples; distinguish it from original outputs."
+  ]
+}

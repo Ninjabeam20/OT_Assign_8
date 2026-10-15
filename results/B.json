@@ -1,0 +1,588 @@
+{
+  "description": "0/1 knapsack and binary-to-spin reformulation",
+  "measurements": [
+    {
+      "seed": 0,
+      "method": "greedy",
+      "value": 486,
+      "optimal_value": 486,
+      "gap": 0,
+      "seconds_median": 1.9916999917768408e-05,
+      "seconds_samples": [
+        2.1208999896771275e-05,
+        2.00829999812413e-05,
+        1.9750000319618266e-05,
+        1.9916999917768408e-05,
+        1.9582999811973423e-05
+      ]
+    },
+    {
+      "seed": 0,
+      "method": "dynamic_programming",
+      "value": 486,
+      "optimal_value": 486,
+      "gap": 0,
+      "seconds_median": 7.654199998796685e-05,
+      "seconds_samples": [
+        8.000000070751412e-05,
+        7.679100053792354e-05,
+        7.654199998796685e-05,
+        7.550000009359792e-05,
+        7.641699994564988e-05
+      ]
+    },
+    {
+      "seed": 0,
+      "method": "branch_and_bound",
+      "value": 486,
+      "optimal_value": 486,
+      "gap": 0,
+      "seconds_median": 4.524999985733302e-05,
+      "seconds_samples": [
+        4.837500000576256e-05,
+        4.6082999688223936e-05,
+        4.516599983617198e-05,
+        4.508300025918288e-05,
+        4.524999985733302e-05
+      ]
+    },
+    {
+      "seed": 0,
+      "method": "integer_programming",
+      "value": 486,
+      "optimal_value": 486,
+      "gap": 0,
+      "seconds_median": 0.0015520000006290502,
+      "seconds_samples": [
+        0.0016657920004945481,
+        0.0015561250002065208,
+        0.0015520000006290502,
+        0.0015136669999264996,
+        0.001479000000472297
+      ]
+    },
+    {
+      "seed": 1,
+      "method": "greedy",
+      "value": 487,
+      "optimal_value": 489,
+      "gap": 2,
+      "seconds_median": 2.0041999960085377e-05,
+      "seconds_samples": [
+        2.1708000531361904e-05,
+        2.1084000763949007e-05,
+        2.0041999960085377e-05,
+        1.95419997908175e-05,
+        1.9624999367806595e-05
+      ]
+    },
+    {
+      "seed": 1,
+      "method": "dynamic_programming",
+      "value": 489,
+      "optimal_value": 489,
+      "gap": 0,
+      "seconds_median": 8.404099935432896e-05,
+      "seconds_samples": [
+        8.150000030582305e-05,
+        8.404099935432896e-05,
+        9.15000000532018e-05,
+        8.454100043309154e-05,
+        8.04170003902982e-05
+      ]
+    },
+    {
+      "seed": 1,
+      "method": "branch_and_bound",
+      "value": 489,
+      "optimal_value": 489,
+      "gap": 0,
+      "seconds_median": 5.958300062047783e-05,
+      "seconds_samples": [
+        6.0416999986045994e-05,
+        6.0166000366734806e-05,
+        5.958300062047783e-05,
+        5.899999996472616e-05,
+        5.858300028194208e-05
+      ]
+    },
+    {
+      "seed": 1,
+      "method": "integer_programming",
+      "value": 489,
+      "optimal_value": 489,
+      "gap": 0,
+      "seconds_median": 0.00534762499955832,
+      "seconds_samples": [
+        0.00534762499955832,
+        0.005639457999677688,
+        0.004993833999833441,
+        0.005357457999707549,
+        0.005079958999886003
+      ]
+    },
+    {
+      "seed": 2,
+      "method": "greedy",
+      "value": 692,
+      "optimal_value": 692,
+      "gap": 0,
+      "seconds_median": 2.0833000235143118e-05,
+      "seconds_samples": [
+        2.1749999177700374e-05,
+        2.1207999452599324e-05,
+        2.0791000679309946e-05,
+        2.0791999304492492e-05,
+        2.0833000235143118e-05
+      ]
+    },
+    {
+      "seed": 2,
+      "method": "dynamic_programming",
+      "value": 692,
+      "optimal_value": 692,
+      "gap": 0,
+      "seconds_median": 9.387499994772952e-05,
+      "seconds_samples": [
+        9.479199979978148e-05,
+        9.387499994772952e-05,
+        9.325000064563937e-05,
+        9.666699952504132e-05,
+        9.349999982077861e-05
+      ]
+    },
+    {
+      "seed": 2,
+      "method": "branch_and_bound",
+      "value": 692,
+      "optimal_value": 692,
+      "gap": 0,
+      "seconds_median": 5.062500076746801e-05,
+      "seconds_samples": [
+        5.183300072530983e-05,
+        5.066599987912923e-05,
+        5.012499968870543e-05,
+        5.062500076746801e-05,
+        5.004199920222163e-05
+      ]
+    },
+    {
+      "seed": 2,
+      "method": "integer_programming",
+      "value": 692,
+      "optimal_value": 692,
+      "gap": 0,
+      "seconds_median": 0.005766250000306172,
+      "seconds_samples": [
+        0.005792042000393849,
+        0.0057686250002007,
+        0.005766250000306172,
+        0.005618291999780922,
+        0.005754333000368206
+      ]
+    },
+    {
+      "seed": 3,
+      "method": "greedy",
+      "value": 657,
+      "optimal_value": 657,
+      "gap": 0,
+      "seconds_median": 1.9709000298462342e-05,
+      "seconds_samples": [
+        2.033300006587524e-05,
+        1.9209000129194465e-05,
+        1.904199962154962e-05,
+        1.9709000298462342e-05,
+        2.020899955823552e-05
+      ]
+    },
+    {
+      "seed": 3,
+      "method": "dynamic_programming",
+      "value": 657,
+      "optimal_value": 657,
+      "gap": 0,
+      "seconds_median": 0.00010108299920830177,
+      "seconds_samples": [
+        9.77909994617221e-05,
+        9.695800054032588e-05,
+        0.00010187499992753146,
+        0.00010208299954683753,
+        0.00010108299920830177
+      ]
+    },
+    {
+      "seed": 3,
+      "method": "branch_and_bound",
+      "value": 657,
+      "optimal_value": 657,
+      "gap": 0,
+      "seconds_median": 6.0290999499557074e-05,
+      "seconds_samples": [
+        5.908299954171525e-05,
+        5.845800023962511e-05,
+        6.0957999266975094e-05,
+        6.0290999499557074e-05,
+        6.037499952071812e-05
+      ]
+    },
+    {
+      "seed": 3,
+      "method": "integer_programming",
+      "value": 657,
+      "optimal_value": 657,
+      "gap": 0,
+      "seconds_median": 0.0016547089999221498,
+      "seconds_samples": [
+        0.0016547089999221498,
+        0.0016588749995207763,
+        0.0016806670000732993,
+        0.0016542499997740379,
+        0.0015801669997017598
+      ]
+    },
+    {
+      "seed": 4,
+      "method": "greedy",
+      "value": 505,
+      "optimal_value": 505,
+      "gap": 0,
+      "seconds_median": 2.020900046773022e-05,
+      "seconds_samples": [
+        2.112500078510493e-05,
+        2.0167000002402347e-05,
+        1.9874999452440534e-05,
+        2.020900046773022e-05,
+        2.0541999219858553e-05
+      ]
+    },
+    {
+      "seed": 4,
+      "method": "dynamic_programming",
+      "value": 505,
+      "optimal_value": 505,
+      "gap": 0,
+      "seconds_median": 8.245800017903093e-05,
+      "seconds_samples": [
+        8.245800017903093e-05,
+        8.454199996776879e-05,
+        8.166699990397319e-05,
+        8.083300053840503e-05,
+        8.358300055988366e-05
+      ]
+    },
+    {
+      "seed": 4,
+      "method": "branch_and_bound",
+      "value": 505,
+      "optimal_value": 505,
+      "gap": 0,
+      "seconds_median": 4.904200068267528e-05,
+      "seconds_samples": [
+        5.066599987912923e-05,
+        4.904199977318058e-05,
+        4.933399941364769e-05,
+        4.904200068267528e-05,
+        4.86250000903965e-05
+      ]
+    },
+    {
+      "seed": 4,
+      "method": "integer_programming",
+      "value": 505,
+      "optimal_value": 505,
+      "gap": 0,
+      "seconds_median": 0.0015128329996514367,
+      "seconds_samples": [
+        0.0014778329996261164,
+        0.0015128329996514367,
+        0.0015715839999757009,
+        0.001561957999911101,
+        0.0015086249995874823
+      ]
+    }
+  ],
+  "maxcut": {
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "qubo": [
+      [
+        -2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        -2.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        -2.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        1.0,
+        -2.0
+      ]
+    ],
+    "constant": -2.0,
+    "h": [
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0
+    ],
+    "J": [
+      [
+        0.0,
+        0.25,
+        0.0,
+        0.25
+      ],
+      [
+        0.25,
+        0.0,
+        0.25,
+        0.0
+      ],
+      [
+        0.0,
+        0.25,
+        0.0,
+        0.25
+      ],
+      [
+        0.25,
+        0.0,
+        0.25,
+        0.0
+      ]
+    ],
+    "enumeration": [
+      {
+        "bits": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "qubo_energy": 0.0,
+        "cut": 0
+      },
+      {
+        "bits": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "qubo_energy": -4.0,
+        "cut": 4
+      },
+      {
+        "bits": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "qubo_energy": -4.0,
+        "cut": 4
+      },
+      {
+        "bits": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "qubo_energy": -2.0,
+        "cut": 2
+      },
+      {
+        "bits": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "qubo_energy": 0.0,
+        "cut": 0
+      }
+    ]
+  },
+  "penalty_example": {
+    "objective": "-v.x + P(sum(x)-2)^2",
+    "values": [
+      7,
+      4,
+      5,
+      3
+    ],
+    "P": 20.0,
+    "solution": [
+      1,
+      0,
+      1,
+      0
+    ]
+  },
+  "correctness": true,
+  "limitations": [
+    "Ratio greedy has no exactness guarantee; DP is pseudo-polynomial; branch-and-bound is exponential in the worst case."
+  ],
+  "metadata": {
+    "track": "B",
+    "mode": "full",
+    "timestamp_utc": "2026-10-15T04:38:12.121379+00:00",
+    "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu_count": 10,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "elapsed_seconds": 0.1077830409994931,
+    "source_sha256": "eeac649ba0fc983e07aec8a0714d28c0bdb249b82d83d9d83785e693c8317d97",
+    "dependencies": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1"
+    }
+  }
+}

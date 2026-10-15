@@ -1,0 +1,10 @@
+# Preserve upstream license, patch context and captured logs verbatim.
+LICENSES/** -whitespace
+results/**/*.log -whitespace
+results/*.log -whitespace
+scripts/*.patch -whitespace
+prompts/second-tool/RESPONSE.md -whitespace
+prompts/second-tool/GEMINI_*_ORIGINAL.md -whitespace
+*.pdf binary
+*.png binary
+prompts/VISIBLE_CONVERSATION.md -whitespace

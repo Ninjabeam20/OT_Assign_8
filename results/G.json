@@ -1,0 +1,141 @@
+{
+  "track": "G",
+  "description": "Real xv6-riscv: round-robin/eager fork baseline versus equal-ticket lottery/COW fork",
+  "upstream": {
+    "repository": "https://github.com/mit-pdos/xv6-riscv",
+    "commit": "4ded343d5d9d40d4e9dcf4867ca45b14170bf364",
+    "archive_sha256": "628a8e82527269ab16d1e98550b82f975739457e0b464156e66d25ca9f1be107"
+  },
+  "benchmark_mode": "full",
+  "experiment_plan": [
+    {
+      "variant": "baseline",
+      "cpus": 1,
+      "repetitions": 3,
+      "usertests": true
+    },
+    {
+      "variant": "optimized",
+      "cpus": 1,
+      "repetitions": 3,
+      "usertests": true
+    },
+    {
+      "variant": "optimized",
+      "cpus": 3,
+      "repetitions": 0,
+      "usertests": true
+    }
+  ],
+  "measurements": {
+    "baseline": {
+      "samples_ticks": [
+        {
+          "fork": 81,
+          "cpu": 13,
+          "mixed": 20
+        },
+        {
+          "fork": 81,
+          "cpu": 13,
+          "mixed": 20
+        },
+        {
+          "fork": 82,
+          "cpu": 13,
+          "mixed": 20
+        }
+      ],
+      "median_ticks": {
+        "fork": 81,
+        "cpu": 13,
+        "mixed": 20
+      },
+      "usertests_passed": true,
+      "usertests_scope": "all",
+      "cpus": 1,
+      "repetitions": 3,
+      "fresh_filesystem": true,
+      "log": "results/xv6/baseline-cpu1-1792038245212893000-c4ee3511/timing.log",
+      "usertests_log": "results/xv6/baseline-cpu1-1792038245212893000-c4ee3511/verification.log",
+      "build_log": "results/xv6/baseline-cpu1-1792038245212893000-c4ee3511/build.log"
+    },
+    "optimized": {
+      "samples_ticks": [
+        {
+          "fork": 8,
+          "cpu": 13,
+          "mixed": 20
+        },
+        {
+          "fork": 8,
+          "cpu": 13,
+          "mixed": 20
+        },
+        {
+          "fork": 8,
+          "cpu": 14,
+          "mixed": 20
+        }
+      ],
+      "median_ticks": {
+        "fork": 8,
+        "cpu": 13,
+        "mixed": 20
+      },
+      "usertests_passed": true,
+      "usertests_scope": "all",
+      "cpus": 1,
+      "repetitions": 3,
+      "fresh_filesystem": true,
+      "log": "results/xv6/optimized-cpu1-1792038433255377000-885e6c20/timing.log",
+      "usertests_log": "results/xv6/optimized-cpu1-1792038433255377000-885e6c20/verification.log",
+      "build_log": "results/xv6/optimized-cpu1-1792038433255377000-885e6c20/build.log"
+    },
+    "speedup": {
+      "fork": 10.125,
+      "cpu": 1.0,
+      "mixed": 1.0
+    }
+  },
+  "correctness": {
+    "baseline_usertests": true,
+    "optimized_usertests": true,
+    "guest_cow_isolation_and_copyout": true,
+    "optimized_usertests_three_harts": true,
+    "multicore_log": "results/xv6/optimized-cpu3-1792038575798992000-c4d548ef/verification.log"
+  },
+  "limitations": [
+    "QEMU emulation on host; not physical RISC-V hardware.",
+    "Guest timer ticks; coarse timing for short workloads.",
+    "Equal-ticket lottery; no configurable ticket syscall or measured fairness claim.",
+    "Combined COW/scheduler change; cannot attribute gains separately without ablation.",
+    "Performance measured on one hart for reproducibility."
+  ],
+  "toolchain": {
+    "qemu-system-riscv64": "QEMU emulator version 11.1.2",
+    "riscv64-elf-gcc": "riscv64-elf-gcc (GCC) 16.2.0"
+  },
+  "metadata": {
+    "track": "G",
+    "mode": "full",
+    "timestamp_utc": "2026-10-15T04:31:30.716611+00:00",
+    "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu_count": 10,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "elapsed_seconds": 445.507868875,
+    "source_sha256": "0d547d6fe3619034d97420a28bfd0d35186fe1ecfbc1ad5038ce184dfb52232d",
+    "dependencies": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1"
+    }
+  }
+}

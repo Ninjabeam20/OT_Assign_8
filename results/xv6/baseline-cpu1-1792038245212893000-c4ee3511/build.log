@@ -1,0 +1,5 @@
+make: `kernel/kernel' is up to date.
+mkfs/mkfs fs.img README user/_optbench user/_cat user/_echo user/_forktest user/_grep user/_init user/_kill user/_ln user/_ls user/_mkdir user/_rm user/_sh user/_stressfs user/_usertests user/_grind user/_wc user/_zombie user/_logstress user/_forphan user/_dorphan user/_sync 
+nmeta 47 (boot, super, log blocks 31, inode blocks 13, bitmap blocks 1) blocks 1953 total 2000
+balloc: first 1027 blocks have been allocated
+balloc: write bitmap block at sector 46

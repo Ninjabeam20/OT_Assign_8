@@ -1,0 +1,1146 @@
+{
+  "description": "Synthetic integer-valued sales workload on SQLite; binary index selection under measured page-storage budget.",
+  "formulation": "maximize sum(gain_i*x_i), sum(size_i*x_i)<=budget, x_i binary; gains measured one index at a time.",
+  "measurements": [
+    {
+      "seed": 0,
+      "method": "default_no_secondary_indexes",
+      "indexes": [],
+      "storage_bytes": 917504,
+      "seconds_median": 0.007704458000262093,
+      "seconds_samples": [
+        0.007676791999983834,
+        0.00789395899982992,
+        0.007734917000107089,
+        0.007704458000262093,
+        0.007491709000078117
+      ],
+      "throughput_queries_per_second": 648.974918135696,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            172,
+            "SCAN sales"
+          ],
+          [
+            8,
+            0,
+            0,
+            "USE TEMP B-TREE FOR GROUP BY"
+          ]
+        ]
+      },
+      "result_sha256": "752f513c9aaf4cc1a8d977a8dc11df3a5dbf07768d55d5528655f11b4e055a51"
+    },
+    {
+      "seed": 0,
+      "method": "greedy",
+      "indexes": [
+        "ix_region_amount",
+        "ix_region"
+      ],
+      "selection_seconds": 7.167000148911029e-06,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.3834975499366755,
+      "seconds_median": 0.003232417000162968,
+      "seconds_samples": [
+        0.003216209000129311,
+        0.0032382499998675485,
+        0.0032730419998188154,
+        0.003224333000162005,
+        0.0032108750001498265,
+        0.003239374999793654,
+        0.003232417000162968
+      ],
+      "throughput_queries_per_second": 1546.830127346786,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "752f513c9aaf4cc1a8d977a8dc11df3a5dbf07768d55d5528655f11b4e055a51"
+    },
+    {
+      "seed": 0,
+      "method": "ILP",
+      "indexes": [
+        "ix_region",
+        "ix_region_amount"
+      ],
+      "selection_seconds": 0.001025000000026921,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.400111275645805,
+      "seconds_median": 0.0032100420003189356,
+      "seconds_samples": [
+        0.00327758299999914,
+        0.0032100420003189356,
+        0.0031982919999791193,
+        0.003256667000187008,
+        0.003204582999842387,
+        0.0032172920000448357,
+        0.003174750000198401
+      ],
+      "throughput_queries_per_second": 1557.6120186287974,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "752f513c9aaf4cc1a8d977a8dc11df3a5dbf07768d55d5528655f11b4e055a51"
+    },
+    {
+      "seed": 1,
+      "method": "default_no_secondary_indexes",
+      "indexes": [],
+      "storage_bytes": 917504,
+      "seconds_median": 0.007471084000371775,
+      "seconds_samples": [
+        0.007438874999934342,
+        0.007394750000003114,
+        0.007471084000371775,
+        0.00754575000019031,
+        0.007664209000267874
+      ],
+      "throughput_queries_per_second": 669.2469258478677,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            172,
+            "SCAN sales"
+          ],
+          [
+            8,
+            0,
+            0,
+            "USE TEMP B-TREE FOR GROUP BY"
+          ]
+        ]
+      },
+      "result_sha256": "cf7fb64a86250f54b7fb6c66051181d19474565b4032d3641159766cc7bc9652"
+    },
+    {
+      "seed": 1,
+      "method": "greedy",
+      "indexes": [
+        "ix_region_amount",
+        "ix_region"
+      ],
+      "selection_seconds": 5.957999746897258e-06,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.3294659003551392,
+      "seconds_median": 0.003207208999810973,
+      "seconds_samples": [
+        0.003203415999905701,
+        0.003189790999840625,
+        0.003210542000033456,
+        0.0031675000000177533,
+        0.0032312500002262823,
+        0.003223875000003318,
+        0.003207208999810973
+      ],
+      "throughput_queries_per_second": 1558.9878926801123,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "cf7fb64a86250f54b7fb6c66051181d19474565b4032d3641159766cc7bc9652"
+    },
+    {
+      "seed": 1,
+      "method": "ILP",
+      "indexes": [
+        "ix_region",
+        "ix_region_amount"
+      ],
+      "selection_seconds": 0.0005275419998724828,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.331344229266937,
+      "seconds_median": 0.0032046249998529674,
+      "seconds_samples": [
+        0.0032332920000044396,
+        0.0032115000003614114,
+        0.0031989590002012847,
+        0.0032046249998529674,
+        0.0032017909998103278,
+        0.0032017090002227633,
+        0.0032434580002700386
+      ],
+      "throughput_queries_per_second": 1560.2449585300642,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "cf7fb64a86250f54b7fb6c66051181d19474565b4032d3641159766cc7bc9652"
+    },
+    {
+      "seed": 2,
+      "method": "default_no_secondary_indexes",
+      "indexes": [],
+      "storage_bytes": 917504,
+      "seconds_median": 0.00748337499999252,
+      "seconds_samples": [
+        0.00748337499999252,
+        0.007532832999913808,
+        0.007526916000188066,
+        0.0074444169999878795,
+        0.007368125000084547
+      ],
+      "throughput_queries_per_second": 668.1477274632098,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            172,
+            "SCAN sales"
+          ],
+          [
+            8,
+            0,
+            0,
+            "USE TEMP B-TREE FOR GROUP BY"
+          ]
+        ]
+      },
+      "result_sha256": "4d6e5d4208a211e3ee52dcf0ef207e1bcfd823eddd05c3069e6c14e48ce389a6"
+    },
+    {
+      "seed": 2,
+      "method": "greedy",
+      "indexes": [
+        "ix_region_amount",
+        "ix_region"
+      ],
+      "selection_seconds": 5.833000159327639e-06,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.331511337657506,
+      "seconds_median": 0.0032096669997372373,
+      "seconds_samples": [
+        0.003223624999918684,
+        0.0031954579999364796,
+        0.0032517909999114636,
+        0.0032096669997372373,
+        0.0031984170000214363,
+        0.003209833999790135,
+        0.0031949999997777923
+      ],
+      "throughput_queries_per_second": 1557.794001810571,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "4d6e5d4208a211e3ee52dcf0ef207e1bcfd823eddd05c3069e6c14e48ce389a6"
+    },
+    {
+      "seed": 2,
+      "method": "ILP",
+      "indexes": [
+        "ix_region",
+        "ix_region_amount"
+      ],
+      "selection_seconds": 0.0005006659998798568,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.3155196090147556,
+      "seconds_median": 0.003231833999961964,
+      "seconds_samples": [
+        0.0032364999997298582,
+        0.003231833999961964,
+        0.0031756670000504528,
+        0.0032553749997532577,
+        0.003216250000150467,
+        0.0032187500000873115,
+        0.003286665999894467
+      ],
+      "throughput_queries_per_second": 1547.109164659709,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "4d6e5d4208a211e3ee52dcf0ef207e1bcfd823eddd05c3069e6c14e48ce389a6"
+    },
+    {
+      "seed": 3,
+      "method": "default_no_secondary_indexes",
+      "indexes": [],
+      "storage_bytes": 917504,
+      "seconds_median": 0.007441917000051035,
+      "seconds_samples": [
+        0.007441917000051035,
+        0.0075980000001436565,
+        0.00754054199978782,
+        0.007420375000037893,
+        0.007396708000214858
+      ],
+      "throughput_queries_per_second": 671.8698958837772,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            172,
+            "SCAN sales"
+          ],
+          [
+            8,
+            0,
+            0,
+            "USE TEMP B-TREE FOR GROUP BY"
+          ]
+        ]
+      },
+      "result_sha256": "adf3b0ac7fda9848f9972079defc289ad24be2c9b126d0a1242b49d3137fd1f7"
+    },
+    {
+      "seed": 3,
+      "method": "greedy",
+      "indexes": [
+        "ix_region_amount",
+        "ix_region"
+      ],
+      "selection_seconds": 5.666000106430147e-06,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.3120224332055903,
+      "seconds_median": 0.0032187910001084674,
+      "seconds_samples": [
+        0.0032097919997795543,
+        0.003212000000075932,
+        0.0032553330001974246,
+        0.0032252920000246377,
+        0.0031811660001039854,
+        0.0032437919999210862,
+        0.0032187910001084674
+      ],
+      "throughput_queries_per_second": 1553.3782714787972,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "adf3b0ac7fda9848f9972079defc289ad24be2c9b126d0a1242b49d3137fd1f7"
+    },
+    {
+      "seed": 3,
+      "method": "ILP",
+      "indexes": [
+        "ix_region",
+        "ix_region_amount"
+      ],
+      "selection_seconds": 0.00048133299969777,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.31133379924461,
+      "seconds_median": 0.0032197499999711,
+      "seconds_samples": [
+        0.003225459000077535,
+        0.003208250000170665,
+        0.003191750000041793,
+        0.003238457999941602,
+        0.0031971250000424334,
+        0.0032586249999440042,
+        0.0032197499999711
+      ],
+      "throughput_queries_per_second": 1552.915599051131,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "adf3b0ac7fda9848f9972079defc289ad24be2c9b126d0a1242b49d3137fd1f7"
+    },
+    {
+      "seed": 4,
+      "method": "default_no_secondary_indexes",
+      "indexes": [],
+      "storage_bytes": 917504,
+      "seconds_median": 0.007460583000010956,
+      "seconds_samples": [
+        0.007460792000074434,
+        0.007411916999899404,
+        0.0077148339996711,
+        0.007394416999886744,
+        0.007460583000010956
+      ],
+      "throughput_queries_per_second": 670.1889115090144,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            172,
+            "SCAN sales"
+          ],
+          [
+            8,
+            0,
+            0,
+            "USE TEMP B-TREE FOR GROUP BY"
+          ]
+        ]
+      },
+      "result_sha256": "93a1bbbbff9ffc3151990f22e27c1ae8b12204e538e54391f14ece2fff02ec42"
+    },
+    {
+      "seed": 4,
+      "method": "greedy",
+      "indexes": [
+        "ix_region_amount",
+        "ix_region"
+      ],
+      "selection_seconds": 5.290999979479238e-06,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.3283398613244546,
+      "seconds_median": 0.0032042499997260165,
+      "seconds_samples": [
+        0.0032042499997260165,
+        0.003215042000192625,
+        0.0032363339996663854,
+        0.003182625000135886,
+        0.0031673749999754364,
+        0.0032680420003998734,
+        0.003165833000366547
+      ],
+      "throughput_queries_per_second": 1560.4275572840857,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "93a1bbbbff9ffc3151990f22e27c1ae8b12204e538e54391f14ece2fff02ec42"
+    },
+    {
+      "seed": 4,
+      "method": "ILP",
+      "indexes": [
+        "ix_region",
+        "ix_region_amount"
+      ],
+      "selection_seconds": 0.0004903330000161077,
+      "storage_bytes": 1994752,
+      "extra_bytes": 1077248,
+      "speedup": 2.320133860695652,
+      "seconds_median": 0.0032155829999283014,
+      "seconds_samples": [
+        0.0032229579996965185,
+        0.003188791999946261,
+        0.0032155829999283014,
+        0.0032432919997518184,
+        0.003181792000304995,
+        0.0031771250000929285,
+        0.0032755830002315633
+      ],
+      "throughput_queries_per_second": 1554.9279866548263,
+      "plans": {
+        "customer_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "regional_total": [
+          [
+            3,
+            0,
+            135,
+            "SEARCH sales USING COVERING INDEX ix_region_amount (region=?)"
+          ]
+        ],
+        "date_total": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "customer_dates": [
+          [
+            3,
+            0,
+            172,
+            "SCAN sales"
+          ]
+        ],
+        "region_group": [
+          [
+            6,
+            0,
+            169,
+            "SCAN sales USING COVERING INDEX ix_region_amount"
+          ]
+        ]
+      },
+      "result_sha256": "93a1bbbbff9ffc3151990f22e27c1ae8b12204e538e54391f14ece2fff02ec42"
+    }
+  ],
+  "selection_inputs": [
+    {
+      "seed": 0,
+      "index_sizes_bytes": [
+        516096,
+        462848,
+        507904,
+        651264,
+        614400
+      ],
+      "isolated_gains_seconds": [
+        0.00132745800056,
+        0.0005035420003878244,
+        0.0,
+        0.0013573750002251472,
+        0.004468458000701503
+      ],
+      "storage_budget_bytes": 1101004
+    },
+    {
+      "seed": 1,
+      "index_sizes_bytes": [
+        516096,
+        462848,
+        503808,
+        647168,
+        614400
+      ],
+      "isolated_gains_seconds": [
+        0.0011047510006392258,
+        0.00025383400043210713,
+        0.0,
+        0.001643917000365036,
+        0.004251375000421831
+      ],
+      "storage_budget_bytes": 1097728
+    },
+    {
+      "seed": 2,
+      "index_sizes_bytes": [
+        516096,
+        462848,
+        507904,
+        651264,
+        614400
+      ],
+      "isolated_gains_seconds": [
+        0.0010640410000632983,
+        0.0002885829999286216,
+        0.0,
+        0.0016590420000284212,
+        0.004275624999991123
+      ],
+      "storage_budget_bytes": 1101004
+    },
+    {
+      "seed": 3,
+      "index_sizes_bytes": [
+        516096,
+        462848,
+        503808,
+        647168,
+        614400
+      ],
+      "isolated_gains_seconds": [
+        0.0009218340001098113,
+        0.00025183400020978297,
+        0.0,
+        0.0015117499997359118,
+        0.004221500000312517
+      ],
+      "storage_budget_bytes": 1097728
+    },
+    {
+      "seed": 4,
+      "index_sizes_bytes": [
+        516096,
+        462848,
+        503808,
+        647168,
+        614400
+      ],
+      "isolated_gains_seconds": [
+        0.0010440410001137934,
+        0.0002683329998944828,
+        0.0,
+        0.0014442080000662827,
+        0.004247958000178187
+      ],
+      "storage_budget_bytes": 1097728
+    }
+  ],
+  "row_count": 50000,
+  "queries": [
+    {
+      "name": "customer_total",
+      "sql": "SELECT sum(amount), count(*) FROM sales WHERE customer=?",
+      "parameters": [
+        42
+      ]
+    },
+    {
+      "name": "regional_total",
+      "sql": "SELECT sum(amount), count(*) FROM sales WHERE region=?",
+      "parameters": [
+        3
+      ]
+    },
+    {
+      "name": "date_total",
+      "sql": "SELECT sum(amount), count(*) FROM sales WHERE day BETWEEN ? AND ?",
+      "parameters": [
+        50,
+        60
+      ]
+    },
+    {
+      "name": "customer_dates",
+      "sql": "SELECT sum(amount), count(*) FROM sales WHERE customer=? AND day BETWEEN ? AND ?",
+      "parameters": [
+        42,
+        20,
+        100
+      ]
+    },
+    {
+      "name": "region_group",
+      "sql": "SELECT region, sum(amount), count(*) FROM sales GROUP BY region",
+      "parameters": []
+    }
+  ],
+  "sqlite_version": "3.50.4",
+  "correctness": true,
+  "limitations": [
+    "Additive gain model ignores interacting indexes; ILP optimality applies to that model, not actual query latency.",
+    "Warm-cache single-client read workload; throughput is sequential queries per second, not concurrent throughput.",
+    "SQLite uses EXPLAIN QUERY PLAN rather than PostgreSQL EXPLAIN ANALYZE; latency measured separately."
+  ],
+  "metadata": {
+    "track": "H",
+    "mode": "full",
+    "timestamp_utc": "2026-10-15T04:23:01.010446+00:00",
+    "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu_count": 10,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "elapsed_seconds": 2.046271459000309,
+    "source_sha256": "4f13cc3820e0abfbbae6627fdecb929c22d0267efae19dfa4fe0b6e8559200eb",
+    "dependencies": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1"
+    }
+  }
+}
