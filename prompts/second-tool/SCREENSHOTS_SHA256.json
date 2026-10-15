@@ -1,0 +1,14 @@
+[
+  {
+    "path": "screenshots/gemini-execution-summary.png",
+    "sha256": "bac3cf4643c156618f9c188253470d7431a32f7cecdbfe4bc330a234b6773d9c",
+    "source": "user-supplied attachment, copied unchanged",
+    "received_utc": "2026-10-15T05:21:41.734482+00:00"
+  },
+  {
+    "path": "screenshots/gemini-benchmark-response.png",
+    "sha256": "5ba1bbe3398b428946f0280bebbc6b3cca3c97b9c2126ef54ad40e0f1b71b6be",
+    "source": "user-supplied attachment, copied unchanged",
+    "received_utc": "2026-10-15T05:21:41.736059+00:00"
+  }
+]

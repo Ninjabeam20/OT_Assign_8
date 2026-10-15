@@ -13,3 +13,5 @@ Resulting changes: both original screenshots retained and embedded in the report
 ## Latest submission revision - 2026-10-15
 
 The student requested continuation from HANDOFF.md, supplied https://github.com/Ninjabeam20/OT_Assign_8.git, and instructed that Gemini proof should simply state it was done in Antigravity, without images. The current submission replaces the image appendix with that statement, keeps proof images and extra development artifacts locally, and retains the required code, tests, results, report and AI records. Earlier quoted instructions above describe the prior publication.
+
+The student subsequently requested using the saved images if relevant, and excluded demo/viva and unavailable transcripts from further work. Both images were inspected, found relevant, and restored unchanged to documentation and the PDF as interface evidence.

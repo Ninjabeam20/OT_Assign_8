@@ -25,7 +25,7 @@ Authoritative current ledger. Original supplied status is preserved at `prompts/
 - Clean-environment reproduction and final PDF inspection: see [final verification](FINAL_VERIFICATION.md).
 - Integration commit references: [commit map](../prompts/COMMITS.md).
 - Public repository: **[Ninjabeam20/OT_Assign_8](https://github.com/Ninjabeam20/OT_Assign_8)**. GitHub confirms PUBLIC visibility and default branch `main`. The selected submission tree is verified against the remote after publication. No extra local history, scratch logs, ZIP or environments were pushed.
-- Gemini proof is a text statement confirming use in Google Antigravity IDE. Proof images remain local and are excluded from the current submission and report.
+- Gemini proof includes the Antigravity usage statement and two original screenshots showing model selection, prompt execution and response. Both images are included in the documentation and report appendix.
 - Only assignment source/tests/results/report/evidence are selected for publication; local progress and duplicate runs are excluded. No submission ZIP is included.
 
 

@@ -1,6 +1,6 @@
 # Real submission commit references
 
-Original development and review preceded integration. Earlier broader integration history is retained locally. This public branch includes only the selected faculty deliverables. Commits are truthful submission snapshots, not a fabricated historical per-edit timeline. Original AI artifacts are unchanged. Previously published screenshots remain in historical commits; the current submission replaces them with the student-supplied Antigravity statement.
+Original development and review preceded integration. Earlier broader integration history is retained locally. This public branch includes only the selected faculty deliverables. Commits are truthful submission snapshots, not a fabricated historical per-edit timeline. Original AI artifacts are unchanged. The original screenshots and student-supplied Antigravity statement are included in the current submission.
 
 - A-J implementations, required correctness tests, full results and reproduction scripts: [6f44bc4](https://github.com/Ninjabeam20/OT_Assign_8/commit/6f44bc420c54f9abf3f48fea21bbd3db51a4ed66) (`[AI:Codex]`).
 - Supplied Gemini prompt, original response/code/analysis/status and original screenshots: [bcc9630](https://github.com/Ninjabeam20/OT_Assign_8/commit/bcc9630f99cfe0216611661a5e43572d617298d4) (`[AI:Gemini]`). The label identifies the artifact source, not the Git committer's identity.

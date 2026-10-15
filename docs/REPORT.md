@@ -198,6 +198,18 @@ All selected suites preserve observed line coverage, but reduced suites miss one
 
 ![Track J](../output/figures/J.png)
 
+## Gemini evidence 1 - Prompt and response
+
+Original user-supplied screenshot: prompt-file execution, selected Gemini 3.8 Flash High label and generated-artifact summary. The UI displays Worked for 15m; the original response claims approximately 2.5 seconds. These are different reported durations, not independently measured code-generation latency.
+
+![Gemini evidence 1 - Prompt and response](../prompts/second-tool/screenshots/gemini-execution-summary.png)
+
+## Gemini evidence 2 - Benchmark claims
+
+Original user-supplied screenshot: Gemini reports its knapsack example, validation, 100-instance cross-check and timing claims. This is evidence of the response, not independent verification. Our exhaustive checks and large-integer counterexamples are in results/AI_COMPARISON.json and prompts/second-tool/COMPARISON.md.
+
+![Gemini evidence 2 - Benchmark claims](../prompts/second-tool/screenshots/gemini-benchmark-response.png)
+
 ## AI comparison
 
 The student confirms Gemini 3.8 Flash (High) was used in Google Antigravity IDE for Track B. See [usage statement](../prompts/second-tool/ANTIGRAVITY_EVIDENCE.md).

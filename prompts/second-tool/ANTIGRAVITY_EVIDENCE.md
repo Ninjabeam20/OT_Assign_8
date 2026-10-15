@@ -7,4 +7,4 @@ The student confirms that Gemini 3.8 Flash (High) was used in Google Antigravity
 - [Original code](knapsack_second_tool.py)
 - [Independent comparison](COMPARISON.md)
 
-At the student's request, proof images are kept locally and excluded from the current submission.
+The original proof images are included in [screenshot evidence](SCREENSHOT_EVIDENCE.md) and in the report appendix. They show the selected model and response; independent correctness checks are reported separately.
